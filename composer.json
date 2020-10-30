@@ -1,0 +1,15 @@
+{
+    "name": "blockpc/blockpc-mvc-git",
+    "description": "Mini framework only poo",
+    "type": "project",
+    "require": {
+        "vlucas/phpdotenv": "^5.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juan Carlos Marchant",
+            "email": "juan.marchant@gmail.com"
+        }
+    ]
+}
