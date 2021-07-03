@@ -1,0 +1,32 @@
+{% extends layouts.frontend %}
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
+        <div>
+            <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-200">
+                Register a new account
+            </h2>
+        </div>
+        <form class="bg-white dark:bg-gray-800 max-w-sm mx-auto rounded-xl shadow-xl overflow-hidden p-6 space-y-10" action="#" method="POST">
+            <div class="f-outline px-2 relative border-b border-gray-600 dark:border-gray-300 rounded-lg focus-within:border-indigo-500">
+                <input type="email" name="email" placeholder=" "
+                    class="block p-2 w-full text-lg appearance-none focus:outline-none bg-transparent" />
+                <label for="email"
+                    class="absolute ml-5 top-0 text-lg text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 mt-2 -z-1 duration-300 origin-0 px-2">Email</label>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .f-outline input:focus-within ~ label,
+    .f-outline input:not(:placeholder-shown) ~ label {
+        transform: translateY(-1.5rem) translatex(-1rem) scaleX(0.80) scaleY(0.80);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% if( $error = flash('error') ): %}
+<div class="alert-danger">
+    <p class="font-bold">Error!</p>
+    <p class="text-sm">{{ $error }}.</p>
+</div>
+{% endif; %}
+{% if( $message = flash('message') ): %}
+<div class="alert-success">
+    <p class="font-bold">Mensaje</p>
+    <p class="text-sm">{{ $message }}.</p>
+</div>
+{% endif; %}
+{% if( $info = flash('info') ): %}
+<div class="alert-info">
+    <p class="font-bold">Mensaje</p>
+    <p class="text-sm">{{ $info }}.</p>
+</div>
+{% endif; %}
+{% if( $warning = flash('warning') ): %}
+<div class="alert-warning">
+    <p class="font-bold">Atención!</p>
+    <p class="text-sm">{{ $warning }}.</p>
+</div>
+{% endif; %}
