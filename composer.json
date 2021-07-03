@@ -2,14 +2,41 @@
     "name": "blockpc/blockpc-mvc-git",
     "description": "Mini framework only poo",
     "type": "project",
-    "require": {
-        "vlucas/phpdotenv": "^5.2"
-    },
     "license": "MIT",
     "authors": [
         {
             "name": "Juan Carlos Marchant",
             "email": "juan.marchant@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "helpers/helpers.php"
+        ]
+    },
+    "require": {
+        "ausi/slug-generator": "^1.1",
+        "illuminate/database": "^8.19",
+        "illuminate/hashing": "^8.19",
+        "illuminate/pagination": "^8.19",
+        "intervention/image": "^2.5",
+        "jasongrimes/paginator": "^1.0",
+        "nesbot/carbon": "^2.50",
+        "splitbrain/php-cli": "^1.1",
+        "vlucas/phpdotenv": "^5.2",
+        "wixel/gump": "^1.12"
+    },
+    "require-dev": {
+        "kint-php/kint": "^3.3"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
 }

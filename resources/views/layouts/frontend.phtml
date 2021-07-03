@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ asset('img/logos/favicon.ico') }}" type="image/x-icon">
+
+    <!-- Tailwind CSS -->
+    <link href="{{ asset('css/tailwind.css') }}" rel="stylesheet">
+
+    <style>
+        [x-cloak] { display: none; }
+    </style>
+
+    <!-- Optional styles -->
+    {% yield styles %}
+
+    <title>{% yield title %} | {{ APP_NAME }}</title>
+</head>
+<body class="flex flex-col h-screen justify-between bg-gray-100 dark:bg-gray-800">
+
+    <main class="container mb-auto mx-auto px-4">
+    {% yield content %}
+    </main>
+
+    <footer class="flex justify-between items-center p-3">
+        <span>{{ APP_NAME }} © 2021 </span>
+        <a class="flex items-center" href="//blockpc.cl">
+            <img class="h-6 w-6 rounded mr-2" id="footer-logo" src="{{ asset('img/logos/mini-logo.png') }}">
+            <span class="text-xs text-gray-700">BlockPC</span>
+        </a>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js"></script>
+    
+</body>
+</html>
