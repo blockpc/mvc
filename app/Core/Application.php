@@ -35,9 +35,12 @@ class Application
         try {
             $this->router->resolve();
         } catch(\Exception $e) {
-            session('codigo_error', $e->getCode());
-            session('message_error', $e->getMessage());
-            redirect(route('error'));
+            app()->response->setStatusCode($e->getCode());
+            $this->router->render("errors._error", [
+                'codigo_error' => $e->getCode(),
+                'message_error' => $e->getMessage(),
+            ]);
+            exit;
         }
     }
 

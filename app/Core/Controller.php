@@ -25,14 +25,11 @@ class Controller
             $class = $this->baseMiddleware->setActions($middleware, $actions);
             $class->execute();
         } catch(\Exception $e) {
-            session('codigo_error', $e->getCode());
-            session('message_error', $e->getMessage());
-            redirect(route('error'));
-            //app()->response->setStatusCode($e->getCode());
-            // $this->render("errors._error", [
-            //     'codigo_error' => $e->getCode(),
-            //     'message_error' => $e->getMessage(),
-            // ]);
+            app()->response->setStatusCode($e->getCode());
+            $this->render("errors._error", [
+                'codigo_error' => $e->getCode(),
+                'message_error' => $e->getMessage(),
+            ]);
             exit;
         }
     }

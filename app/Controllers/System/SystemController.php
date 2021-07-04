@@ -25,15 +25,4 @@ class SystemController extends Controller
             'user' => auth(),
         ]);
     }
-
-    public function error()
-    {
-        $codigo = flash('codigo_error');
-        $message = flash('message_error');
-        app()->response->setStatusCode($codigo);
-        $this->render('errors._error', [
-            'codigo_error' => $codigo,
-            'message_error' => $message,
-        ]);
-    }
 }
