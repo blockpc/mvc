@@ -19,9 +19,9 @@ class Application
     public Database $database;
     private $matches;
 
-    public function __construct(string $root)
+    public function __construct()
     {
-        self::$ROOT_DIR = $root;
+        self::$ROOT_DIR = ROOT_APP;
         self::$app = $this;
         self::$user = Session::getUser();
         $this->response = new Response();
@@ -32,7 +32,7 @@ class Application
 
     public function run()
     {
-        echo $this->router->resolve();
+        $this->router->resolve();
     }
 
     public function login(User $user, $recordarme)

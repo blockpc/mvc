@@ -13,7 +13,7 @@ use App\Controllers\PagesController;
 use App\Core\{ Session, Application };
 
 Session::init();
-$app = new Application(dirname(__DIR__));
+$app = new Application();
 
 $app->router->get('/', [PagesController::class, 'home'])->name('home');
 $app->router->get('/login', [AuthController::class, 'login'])->name('auth.login');

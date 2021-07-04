@@ -17,9 +17,9 @@ class BaseMiddleware
         return new $this->middlewares[$middleware]();
     }
 
-    public function setActions(string $middleware, string ...$actions)
+    public function setActions(string $middleware, $actions)
     {
-        $class = new $this->middlewares[$middleware]();
-        $class->actions = $actions;
+        $class = new $this->middlewares[$middleware]($actions);
+        return $class;
     }
 }

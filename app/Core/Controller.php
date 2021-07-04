@@ -5,18 +5,12 @@ use App\Middlewares\BaseMiddleware;
 
 class Controller
 {
-    public string $layout = "main";
     public string $action = '';
-    protected BaseMiddleware $baseMiddlware;
+    protected BaseMiddleware $baseMiddleware;
 
     public function __construct()
     {
-        $this->baseMiddlware = new BaseMiddleware();
-    }
-
-    public function setLayout(string $layout)
-    {
-        $this->layout = $layout;
+        $this->baseMiddleware = new BaseMiddleware();
     }
 
     protected function render(string $view, array $params = [])
@@ -25,10 +19,10 @@ class Controller
         Template::view($view, $params);
     }
 
-    public function middleware(string $middlware)
+    public function middleware(string $middleware, $actions = null)
     {
         try {
-            $class = $this->baseMiddlware->getMiddleware($middlware);
+            $class = $this->baseMiddleware->setActions($middleware, $actions);
             $class->execute();
         } catch(\Exception $e) {
             app()->response->setStatusCode($e->getCode());

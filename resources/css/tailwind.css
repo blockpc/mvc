@@ -4,6 +4,15 @@
 
 @layer components {
     /**
+        * Forms
+    */
+    .is-invalid {
+        @apply border-solid border-red-500;
+    }
+    .text-error {
+        @apply flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1;
+    }
+    /**
         * Menu: current - defeult
     */
     .menu {

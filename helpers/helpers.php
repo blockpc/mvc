@@ -70,3 +70,15 @@ if (! function_exists('redirect') ) {
         app()->response->redirect($url, $code);
     }
 }
+
+if (! function_exists('has_error') ) {
+    function has_error(string $error = "") {
+        return $error ? 'is-invalid' : '';
+    }
+}
+
+if (! function_exists('text_error') ) {
+    function text_error(string $error = "") {
+        return $error ? "<div class='text-error'>{$error}</div>" : '';
+    }
+}

@@ -8,6 +8,9 @@ class PagesController extends Controller
 {
     public function home()
     {
-        return $this->render('pages.home');
+        $user = "Juan Carlos";
+        $this->render('pages.home', [
+            'user' => $user,
+        ]);
     }
 }

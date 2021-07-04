@@ -6,6 +6,11 @@ use App\Core\Controller;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function login()
     {
         return $this->render('auth.login');
@@ -13,6 +18,10 @@ class AuthController extends Controller
 
     public function register()
     {
-        return $this->render('auth.register');
+        // $this->middleware('auth');
+        $saludo = "Hola Mundo";
+        $this->render('auth.register', [
+            'message' => $saludo,
+        ]);
     }
 }

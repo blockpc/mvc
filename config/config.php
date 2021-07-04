@@ -15,13 +15,11 @@ if ( LOCAL_XAMPP ) {
     define('HTTP_HOST', $_ENV['APP_URL']);
 }
 
-define('URL_BASE', "//".HTTP_HOST);
-
-// if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
-//     define('URL_BASE', "https://".HTTP_HOST);
-// } else {
-//     define('URL_BASE', "http://".HTTP_HOST);
-// }
+if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {
+    define('URL_BASE', "https://".HTTP_HOST);
+} else {
+    define('URL_BASE', "http://".HTTP_HOST);
+}
 
 define('DB_CONNECTION', $_ENV['DB_CONNECTION']);
 define('DB_HOST', $_ENV['DB_HOST']);

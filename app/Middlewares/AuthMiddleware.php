@@ -5,16 +5,17 @@ use App\Exceptions\ForbiddenException;
 
 class AuthMiddleware extends BaseMiddleware
 {
-    public array $actions = [];
+    public $actions;
 
-    public function __construct()
-    {}
+    public function __construct($actions)
+    {
+        $this->actions = $actions;
+    }
 
     public function execute()
     {
         if ( !auth() ) {
-            // $controller = app()->controller;
-            // if ( empty($this->actions) || in_array($controller->action, $this->actions) ) {
+            // if ( empty($this->actions) || in_array(app()->controller->action, $this->actions) ) {
             //     throw new ForbiddenException();
             // }
             throw new ForbiddenException();

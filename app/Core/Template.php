@@ -3,12 +3,12 @@ namespace App\Core;
 
 class Template
 {
-    static $blocks = array();
+    static $blocks = [];
 	static $views_path = ROOT_APP . '/resources/views/';
 	static $cache_path = ROOT_APP . '/cache/';
 	static $cache_enabled = FALSE;
 
-	static function view($file, $data = array()) {
+	static function view($file, $data = []) {
 		$file = str_replace(".", "/", $file);
 		$cached_file = self::cache($file);
 		extract($data, EXTR_SKIP);
@@ -19,8 +19,8 @@ class Template
 		if (!file_exists(self::$cache_path)) {
 			mkdir(self::$cache_path, 0744);
 		}
-		$cached_file = self::$cache_path . str_replace(array('/', '.html'), array('_', ''), $file . '.php');
-		if (!self::$cache_enabled || !file_exists($cached_file) || filemtime($cached_file) < filemtime($file)) {
+		$cached_file = self::$cache_path . str_replace(['/', '.html'], ['_', ''], $file . '.php');
+		if ( !self::$cache_enabled || !file_exists($cached_file) || filemtime($cached_file) < filemtime($file) ) {
 			$code = self::includeFiles(self::$views_path . $file . '.phtml');
 			$code = self::compileCode($code);
 			file_put_contents($cached_file, '<?php class_exists(\'' . __CLASS__ . '\') or exit; ?>' . PHP_EOL . $code);
