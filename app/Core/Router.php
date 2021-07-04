@@ -115,8 +115,14 @@ class Router
             }
             return call_user_func($callback, $this->request);
         } catch(\Exception $e) {
-            $this->response->setStatusCode($e->getCode());
-            $this->render("errors._error", ['message' => $e->getMessage()]);
+            session('codigo_error', $e->getCode());
+            session('message_error', $e->getMessage());
+            redirect(route('error'));
+            // app()->response->setStatusCode($e->getCode());
+            // $this->render("errors._error", [
+            //     'codigo_error' => $e->getCode(),
+            //     'message_error' => $e->getMessage(),
+            // ]);
             exit;
         }
     }

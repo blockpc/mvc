@@ -32,7 +32,13 @@ class Application
 
     public function run()
     {
-        $this->router->resolve();
+        try {
+            $this->router->resolve();
+        } catch(\Exception $e) {
+            session('codigo_error', $e->getCode());
+            session('message_error', $e->getMessage());
+            redirect(route('error'));
+        }
     }
 
     public function login(User $user, $recordarme)

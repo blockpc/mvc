@@ -16,7 +16,7 @@ class Seed extends Seeder
         $this->call([
             RolesSeeder::class,
             UserSeeder::class,
-            StageSeeder::class,
+            //...
         ]);
     }
 }

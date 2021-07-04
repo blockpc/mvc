@@ -16,20 +16,20 @@
                 </a>
             </p>
         </div>
-        <form action="{{ url('login') }}" method="POST">
+        <form action="{{ route('auth.access') }}" method="POST">
             {{ csrf_token() }}
-            <div class="py-8 px-8 rounded-xl">
+            <div class="px-8 rounded-xl">
                 <div class="my-5 text-sm">
                     {% $email = flash('email') %}
                     <label for="email" class="block text-black dark:text-white">Email</label>
-                    <input type="email" autofocus name="email" id="email" class="form-input w-full rounded-2xl px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border outline-none {{ $email ? 'border-red-500': 'border-gray-200' }}" placeholder="Email" value="{{ old('email') }}" />
-                    {{ $email ? "<div id='validationEmail' class='is-invalid-text'>$email</div>" : "" }}
+                    <input type="email" autofocus name="email" id="email" class="form-input w-full rounded-2xl px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border outline-none text-sm {{ has_error($email) }}" placeholder="Email" value="{{ old('email') }}" />
+                    {{ text_error($email) }}
                 </div>
                 <div class="my-5 text-sm">
                     {% $password = flash('password') %}
                     <label for="password" class="block text-black dark:text-white">Password</label>
-                    <input type="password" name="password" id="password" class="form-input w-full rounded-2xl px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border outline-none {{ $password ? 'border-red-500': 'border-gray-200' }}" placeholder="Password" />
-                    {{ $password ? "<div id='validationPassword' class='is-invalid-text'>$password</div>" : "" }}
+                    <input type="password" name="password" id="password" class="form-input w-full rounded-2xl px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border outline-none text-sm {{ has_error($password) }}" placeholder="Password" />
+                    {{ text_error($password) }}
                 </div>
                 <div>
                     <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

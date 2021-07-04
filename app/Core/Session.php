@@ -18,8 +18,6 @@ class Session
   
     private static function setSessionId() {
 		self::$_sesion = session_id();
-        // $_SESSION['flash'] = [];
-        // $_SESSION['body'] = [];
 	}
   
     public static function getSessionId()
@@ -44,45 +42,12 @@ class Session
   
     public static function get( string $clave )
     {
-        if ( isset($_SESSION[$clave]) )
-            return $_SESSION[$clave];
+        if ( isset($_SESSION[$clave]) ) {
+            $value = $_SESSION[$clave];
+            unset($_SESSION[$clave]);
+            return $value;
+        }
         return false;
-    }
-
-    public static function setBody(string $key, $value)
-    {
-        $_SESSION['body'][$key] = $value;
-    }
-
-    public static function getBody(string $key)
-    {
-        if ( !isset($_SESSION['body']) ) {
-            return false;
-        }
-        if ( !isset($_SESSION['body'][$key]) ) {
-            return false;
-        }
-        $value = $_SESSION['body'][$key];
-        unset($_SESSION['body'][$key]);
-        return $value;
-    }
-    
-    public static function setFlash(string $key, $value)
-    {
-        $_SESSION['flash'][$key] = $value;
-    }
-
-    public static function getFlash(string $key)
-    {
-        if ( !isset($_SESSION['flash']) ) {
-            return false;
-        }
-        if ( !isset($_SESSION['flash'][$key]) ) {
-            return false;
-        }
-        $flash = $_SESSION['flash'][$key];
-        unset($_SESSION['flash'][$key]);
-        return $flash;
     }
 
     public static function setToken()
@@ -99,14 +64,14 @@ class Session
         }
         if ($_SESSION[self::TOKEN_KEY] == $token) {
             if (time() >= $_SESSION[self::TOKEN_EXPIRE]) {
-                self::setFlash(self::TOKEN_KEY, "Token expired. Please reload form." );
+                self::set('error', "Token expired. Please reload page." );
             } else {
                 unset($_SESSION[self::TOKEN_KEY]);
                 unset($_SESSION[self::TOKEN_EXPIRE]);
                 return true;
             }
         } else {
-            self::setFlash(self::TOKEN_KEY, "Token invalid. Please reload form." );
+            self::set('error', "Token invalid. Please reload page." );
         }
         return false;
     }

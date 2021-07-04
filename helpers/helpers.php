@@ -15,9 +15,16 @@ if (! function_exists('auth') ) {
     }
 }
 
+if (! function_exists('session') ) {
+    function session(string $key, $value) {
+        Session::set($key, $value);
+        return true;
+    }
+}
+
 if (! function_exists('flash') ) {
     function flash(string $key) {
-        return Session::getFlash($key);
+        return Session::get($key);
     }
 }
 
@@ -36,7 +43,7 @@ if (! function_exists('method_field')) {
 
 if (! function_exists('old') ) {
     function old(string $key, $value = null) {
-        return Session::getBody($key) ?: $value;
+        return $_POST[$key] ?? $value;
     }
 }
 
@@ -80,5 +87,26 @@ if (! function_exists('has_error') ) {
 if (! function_exists('text_error') ) {
     function text_error(string $error = "") {
         return $error ? "<div class='text-error'>{$error}</div>" : '';
+    }
+}
+
+if (! function_exists('ip') ) {
+    function ip() {
+        $ipaddress = '';
+        if (getenv('HTTP_CLIENT_IP'))
+            $ipaddress = getenv('HTTP_CLIENT_IP');
+        else if(getenv('HTTP_X_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+        else if(getenv('HTTP_X_FORWARDED'))
+            $ipaddress = getenv('HTTP_X_FORWARDED');
+        else if(getenv('HTTP_FORWARDED_FOR'))
+            $ipaddress = getenv('HTTP_FORWARDED_FOR');
+        else if(getenv('HTTP_FORWARDED'))
+            $ipaddress = getenv('HTTP_FORWARDED');
+        else if(getenv('REMOTE_ADDR'))
+            $ipaddress = getenv('REMOTE_ADDR');
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
     }
 }

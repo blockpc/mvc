@@ -8,7 +8,8 @@ class BaseMiddleware
     public function __construct()
     {
         $this->middlewares = [
-            'auth' => AuthMiddleware::class
+            'auth' => AuthMiddleware::class,
+            'profile' => ProfileMiddleware::class,
         ];
     }
 

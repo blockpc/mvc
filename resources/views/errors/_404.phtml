@@ -1,7 +1,15 @@
-{% extends layouts.errors %}
+{% if ( auth() ): %}
+    {% extends layouts.backend %}
+    {% block content-header-title %}Error{% endblock %}
+    {% block content-header-subtitle %} Un error ha ocurrido {% endblock %}
+{% else: %}
+    {% extends layouts.frontend %}
+{% endif; %}
+{% block title %}Error{% endblock %}
 
 {% block content %}
 <div class="alert alert-danger" role="alert">
-    <h2>Not Found</h2>
+    <h2>Error: Página no encontrada</h2>
+    <p>{{$message_error}}</p>
 </div>
 {% endblock %}

@@ -62,7 +62,7 @@ class Request
             }
             if ( $this->method === "post" || $this->method === "put" || $this->method === "delete") {
                 if ( !isset($_POST['token']) ) {
-                    Session::setFlash('token', 'Token form not exists.');
+                    session('error', 'Token form not exists.');
                     return false;
                 }
                 if ( !Session::token($_POST['token']) ) {
@@ -71,12 +71,25 @@ class Request
                 unset($_POST['token'], $_POST['_method']);
                 foreach( $_POST as $key => $value ) {
                     $this->body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_STRING);
-                    Session::setBody($key, $this->body[$key]);
                 }
             }
             return $this->body;
         } catch(\Exception $e) {
-            echo $e->getMessage();
+            session('codigo_error', $e->getCode());
+            session('message_error', $e->getMessage());
+            redirect(route('error'));
+            // app()->response->setStatusCode($e->getCode());
+            // $this->render("errors._error", [
+            //     'codigo_error' => $e->getCode(),
+            //     'message_error' => $e->getMessage(),
+            // ]);
+            exit;
         }
+    }
+
+    private function render(string $view, array $params = [])
+    {
+        $params = ['url' => app()->request->url] + $params;
+        Template::view($view, $params);
     }
 }
