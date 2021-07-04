@@ -18,10 +18,7 @@ class AuthController extends Controller
 
     public function register()
     {
-        // $this->middleware('auth');
-        $saludo = "Hola Mundo";
-        $this->render('auth.register', [
-            'message' => $saludo,
-        ]);
+        //$this->middleware('auth');
+        $this->render('auth.register');
     }
 }

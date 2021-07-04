@@ -4,10 +4,10 @@
     <p class="text-sm">{{ $error }}.</p>
 </div>
 {% endif; %}
-{% if( $message = flash('message') ): %}
+{% if( $success = flash('success') ): %}
 <div class="alert-success">
     <p class="font-bold">Mensaje</p>
-    <p class="text-sm">{{ $message }}.</p>
+    <p class="text-sm">{{ $success }}.</p>
 </div>
 {% endif; %}
 {% if( $info = flash('info') ): %}
