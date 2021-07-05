@@ -18,6 +18,8 @@ Session::init();
 $app = new Application();
 $app->router->get('/error', [SystemController::class, 'error'])->name('error');
 
+$app->router->get('/responsive', [PagesController::class, 'responsive'])->name('responsive');
+
 $app->router->get('/', [PagesController::class, 'home'])->name('home');
 $app->router->get('/login', [AuthController::class, 'login'])->name('auth.login');
 $app->router->post('/login', [AuthController::class, 'login'])->name('auth.login.post');

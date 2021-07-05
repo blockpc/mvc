@@ -13,4 +13,9 @@ class PagesController extends Controller
             'user' => $user,
         ]);
     }
+
+    public function responsive()
+    {
+        $this->render('pages.responsive');
+    }
 }
