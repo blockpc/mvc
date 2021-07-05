@@ -4,8 +4,10 @@ namespace App\Controllers\Auth;
 
 use App\Core\Controller;
 use App\Core\Request;
+use App\Models\Profile;
 use App\Models\User;
 use App\Requests\LoginRequest;
+use App\Requests\RegisterRequest;
 
 class AuthController extends Controller
 {
@@ -35,8 +37,18 @@ class AuthController extends Controller
         return $this->render('auth.login');
     }
 
-    public function register()
+    public function register(Request $request)
     {
+        if ( $request->method == "post" ) {
+            $register = new RegisterRequest($request);
+            if ( $validated = $register->validate() ) {
+                $user = User::create($validated['user']);
+                $validated['profile']['user_id'] = $user->id;
+                $user->profile()->save(Profile::create($validated['profile']));
+                session('success', "Usuario <b>{$user->name}</b> ha sido creado");
+                redirect( route('home'));
+            }
+        }
         $this->render('auth.register');
     }
 

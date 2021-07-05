@@ -16,7 +16,7 @@
                 </a>
             </p>
         </div>
-        <form action="{{ route('auth.access') }}" method="POST">
+        <form action="{{ route('auth.login.post') }}" method="POST">
             {{ csrf_token() }}
             <div class="px-8 rounded-xl">
                 <div class="my-5 text-sm">

@@ -5,20 +5,11 @@ use App\Core\Request;
 use App\Core\Session;
 use App\Core\Validator;
 
-class LoginRequest
+class LoginRequest extends BaseRequest
 {
-    public Validator $validator;
-    public Request $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-        $this->validator = new Validator();
-    }
-
     public function validate()
     {
-        if ( !$body = $this->request->body() ) {
+        if ( !$this->body ) {
             return false;
         }
 
@@ -42,7 +33,7 @@ class LoginRequest
         //     'password'   => ['required' => 'Please enter a valid credit card.']
         // ]);
 
-        $valid_data = $this->validator->run($body);
+        $valid_data = $this->validator->run($this->body);
 
         if ($this->validator->errors()) {
             foreach ( $this->validator->get_errors_array() as $key => $value ) {
@@ -53,10 +44,5 @@ class LoginRequest
             $valid_data['rememberme'] = isset($valid_data['rememberme']) ? 1 : 0;
             return $valid_data;
         }
-    }
-
-    public function errors()
-    {
-        return $this->validator->get_errors_array();
     }
 }

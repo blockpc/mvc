@@ -20,9 +20,10 @@ $app->router->get('/error', [SystemController::class, 'error'])->name('error');
 
 $app->router->get('/', [PagesController::class, 'home'])->name('home');
 $app->router->get('/login', [AuthController::class, 'login'])->name('auth.login');
-$app->router->post('/login', [AuthController::class, 'login'])->name('auth.access');
+$app->router->post('/login', [AuthController::class, 'login'])->name('auth.login.post');
 $app->router->post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 $app->router->get('/register', [AuthController::class, 'register'])->name('auth.register');
+$app->router->post('/register', [AuthController::class, 'register'])->name('auth.register.post');
 
 $app->router->get('/sistema/dashboard', [SystemController::class, 'dashboard'])->name('dashboard');
 $app->router->get('/sistema/configuracion', [SystemController::class, 'settings'])->name('settings');

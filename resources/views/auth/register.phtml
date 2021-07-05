@@ -10,25 +10,13 @@
                 Register a new account
             </h2>
         </div>
-        <form class="form-row" action="{{ url('register') }}" method="POST">
+        <form class="form-row" action="{{ route('auth.register.post') }}" method="POST">
             {{ csrf_token() }}
             <div class="my-5 text-sm">
                 {% $name = flash('name') %}
-                <label for="name" class="block text-black dark:text-white">Name or Alias</label>
-                <input type="text" class="form-input w-full rounded-lg px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border-2 outline-none {{ has_error($name) }}" name="name" id="name" placeholder="Name or Alias" value="{{ old('name') }}">
+                <label for="name" class="block text-black dark:text-white">User</label>
+                <input type="text" class="form-input w-full rounded-lg px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border-2 outline-none {{ has_error($name) }}" name="name" id="name" placeholder="User" value="{{ old('name') }}">
                 {{ text_error($name) }}
-            </div>
-            <div class="my-5 text-sm">
-                {% $firstname = flash('firstname') %}
-                <label for="firstname" class="block text-black dark:text-white">First Name</label>
-                <input type="text" class="form-input w-full rounded-lg px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border-2 outline-none  {{ has_error($firstname) }}" name="firstname" id="firstname" placeholder="First Name" value="{{ old('firstname') }}">
-                {{ text_error($firstname) }}
-            </div>
-            <div class="my-5 text-sm">
-                {% $lastname = flash('lastname') %}
-                <label for="lastname" class="block text-black dark:text-white">Last Name</label>
-                <input type="text" class="form-input w-full rounded-lg px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border-2 outline-none {{ has_error($lastname) }}" name="lastname" id="lastname" placeholder="Last Name" value="{{ old('lastname') }}">
-                {{ text_error($lastname) }}
             </div>
             <div class="my-5 text-sm">
                 {% $email = flash('email') %}
@@ -47,6 +35,18 @@
                 <label for="confirm_password" class="block text-black dark:text-white">Confirm Password</label>
                 <input type="password" class="form-input w-full rounded-lg px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border-2 outline-none {{ has_error($confirm_password) }}" placeholder="Confirm Password" name="confirm_password" id="confirm_password" autocomplete="new-password">
                 {{ text_error($confirm_password) }}
+            </div>
+            <div class="my-5 text-sm">
+                {% $firstname = flash('firstname') %}
+                <label for="firstname" class="block text-black dark:text-white">First Name</label>
+                <input type="text" class="form-input w-full rounded-lg px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border-2 outline-none  {{ has_error($firstname) }}" name="firstname" id="firstname" placeholder="First Name" value="{{ old('firstname') }}">
+                {{ text_error($firstname) }}
+            </div>
+            <div class="my-5 text-sm">
+                {% $lastname = flash('lastname') %}
+                <label for="lastname" class="block text-black dark:text-white">Last Name</label>
+                <input type="text" class="form-input w-full rounded-lg px-4 py-2 mt-2 bg-gray-100 text-black dark:bg-gray-700 dark:text-gray-100 border-2 outline-none {{ has_error($lastname) }}" name="lastname" id="lastname" placeholder="Last Name" value="{{ old('lastname') }}">
+                {{ text_error($lastname) }}
             </div>
             <div class="my-5 text-sm">
                 <div>
