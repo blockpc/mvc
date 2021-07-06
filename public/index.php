@@ -8,10 +8,9 @@ $dotenv->load();
 require __DIR__.'/../config/config.php';
 require __DIR__.'/../config/bootstrap.php';
 
-use App\Controllers\System\SystemController;
 use App\Controllers\Auth\AuthController;
 use App\Controllers\PagesController;
-use App\Controllers\System\UserController;
+use App\Controllers\System\{SystemController, UsersController, RolesController, PermissionsController};
 use App\Core\{ Session, Application };
 
 Session::init();
@@ -29,6 +28,11 @@ $app->router->get('/sistema/dashboard', [SystemController::class, 'dashboard'])-
 $app->router->get('/sistema/configuracion', [SystemController::class, 'settings'])->name('settings');
 $app->router->get('/sistema/perfil', [SystemController::class, 'profile'])->name('profile');
 
-//$app->router->get('/user/{user}', [UserController::class, 'profile'])->name('profile');
+$app->router->get('/sistema/usuarios', [UsersController::class, 'index'])->name('users.index');
+//$app->router->get('/user/{user}', [UsersController::class, 'profile'])->name('profile');
+
+$app->router->get('/sistema/roles', [RolesController::class, 'index'])->name('roles.index');
+
+$app->router->get('/sistema/permisos', [PermissionsController::class, 'index'])->name('permissions.index');
 
 $app->run();

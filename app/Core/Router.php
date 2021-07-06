@@ -65,6 +65,11 @@ class Router
         $this->names[$name] = $this->path;
     }
 
+    public function names()
+    {
+        return $this->names;
+    }
+
     public function route(string $name, string $param = "")
     {
         return $this->names[$name];

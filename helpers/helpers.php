@@ -112,8 +112,29 @@ if (! function_exists('ip') ) {
 }
 
 if (! function_exists('is_active') ) {
-    function is_active(string $ruta = "") {
-        $path = app()->router->route($ruta);
-        return $path == app()->request->path ? 'menu-current' : 'menu-default';
+    function is_active(string $link = "") {
+        $path = app()->request->path;
+        $names = app()->router->names();
+        $route_name = array_search($path, $names);
+        $routes_names = array_keys($names);
+        $pattern = '/'.str_replace('.*', "", $link).'/i';
+        foreach ( $routes_names as $route ) {
+            if ( $match = preg_match($pattern, $route_name) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+if (! function_exists('link_active') ) {
+    function link_active(string $link = "") {
+        return is_active($link) ? 'link-active' : 'link-default';
+    }
+}
+
+if (! function_exists('menu_active') ) {
+    function menu_active(string $link = "") {
+        return is_active($link) ? 'menu-current' : 'menu-default';
     }
 }

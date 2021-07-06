@@ -24,6 +24,21 @@
     .menu-default {
         @apply text-gray-800 hover:bg-gray-700 hover:text-gray-200 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-200;
     }
+    .link {
+        @apply flex space-x-4 items-center py-2 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white;
+    }
+    .sub-link {
+        @apply flex space-x-4 items-center py-2 px-4 bg-transparent rounded-lg hover:text-white hover:bg-gray-700 ;
+        &:hover {
+            @apply text-white bg-gray-700 outline-none;
+        }
+    }
+    .link-active {
+        @apply border-l-2 border-r-2 border-blue-400;
+    }
+    .link-default {
+        @apply border-none;
+    }
     /** 
         * Alerts 
     */

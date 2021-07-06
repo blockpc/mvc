@@ -12,7 +12,7 @@
                             Default: "text-gray-800 hover:bg-gray-700 hover:text-gray-200 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-200" 
                         -->
                         {% if ( !auth() ): %}
-                        <a href="{{ route('home') }}" class="menu {{ is_active('home') }}">Home</a>
+                        <a href="{{ route('home') }}" class="menu {{ menu_active('home') }}">Home</a>
                         <a href="#" class="menu menu-default">Team</a>
                         <a href="#" class="menu menu-default">Projects</a>
                         <a href="#" class="menu menu-default">Calendar</a>
@@ -110,7 +110,7 @@
                 Default: "text-gray-800 hover:bg-gray-700 hover:text-gray-200 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-gray-200" 
             -->
             {% if ( !auth() ): %}
-            <a href="{{ route('home') }}" class="block menu menu-current">Home</a>
+            <a href="{{ route('home') }}" class="block menu {{ menu_active('home') }}">Home</a>
             <a href="#" class="block menu menu-default">Team</a>
             <a href="#" class="block menu menu-default">Projects</a>
             <a href="#" class="block menu menu-default">Calendar</a>
