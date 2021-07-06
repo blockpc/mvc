@@ -1,0 +1,130 @@
+<!-- mobile -->
+<div class="bg-gray-900 text-gray-100 flex justify-between md:hidden h-16">
+    <!-- logo -->
+    <div class="w-64 flex justify-between">
+        <a href="{{ route('home') }}" class="text-white flex items-center space-x-2 px-6">
+            <img class="h-8 w-8" src="{{ asset('img/logos/mini-logo.png') }}" alt="Workflow"> <span class="text-lg font-bold">{{ APP_NAME }}</span>
+        </a>
+        <!-- button menu -->
+        <button type="button" class="p-4 focus:outline-none focus:bg-gray-700" x-on:click="mobile = !mobile">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
+    </div>
+    <div class="flex-1 flex justify-between items-center">
+        <span class="text-xs pl-1">Mobil</span>
+        <!-- Profile dropdown -->
+        <div class="block px-4">
+            <div class="flex items-center">
+                <div class="relative" x-data="{open:false}">
+                    <div>
+                        <button type="button" class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true" x-on:click="open = !open">
+                            <span class="sr-only">Open user menu</span>
+                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+                        </button>
+                    </div>
+                    <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-gray-800 text-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none text-sm font-semibold" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" x-show="open" x-on:click.away="open = false" x-cloak>
+                        <!-- Active: "bg-gray-100", Not Active: "" -->
+                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-1">Dashboard</a>
+                        <a href="{{ route('settings') }}" class="block px-4 py-2 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+                        <a href="#" class="block px-4 py-2 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                        <a href="#" class="block px-4 py-2 hover:text-white focus:text-white text-red-500 hover:bg-red-800 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-2" onClick="document.getElementById('logout').submit();">Sign out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- desktop -->
+    <div class="bg-gray-900 text-gray-100 w-64 space-y-6 py-4 px-2 absolute inset-y-0 left-0 transform md:relative md:translate-x-0 transition duration-200 ease-in-out flex flex-col" x-bind:class="mobile ? '' : '-translate-x-full'" x-cloak>
+    <!-- sidebar menu -->
+    <div class="flex-1">
+        <!-- logo -->
+        <div class="flex justify-between items-center">
+            <a href="{{ route('home') }}" class="text-white flex items-center space-x-2 px-4 h-16 -mt-4 shadow-md">
+                <img class="h-8 w-8" src="{{ asset('img/logos/mini-logo.png') }}" alt="Workflow"> <span class="text-lg font-bold">{{ APP_NAME }}</span>
+            </a><!-- button menu -->
+            <button type="button" class="p-4 focus:outline-none focus:bg-gray-700 -mt-4" x-on:click="mobile = !mobile" x-show="mobile" x-cloak>
+                <div class="fas fa-angle-left"></div>
+            </button>
+        </div>
+        <!-- sidebar -->
+        <nav class="text-sm font-semibold mt-2">
+            <!-- dashboard -->
+            <a href="{{ route('home') }}" class="flex space-x-4 items-center py-2 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+                <i class="fas fa-tachometer-alt"></i><span>Dashboard</span>
+            </a>
+            <!-- menu dropdown -->
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <a href="#" class="flex justify-between items-center py-2 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white"  @click="open = !open">
+                    <div class="flex space-x-4 items-center">
+                        <i class="fas fa-link"></i><span>Other Links</span>
+                    </div>
+                    <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </a>
+                <div x-show="open" class="right-0 w-full transition duration-200 ease-in-out origin-top-right rounded-md shadow-lg">
+                    <div class="px-2 py-2 bg-gray-800 text-gray-200 rounded-md shadow text-sm font-normal">
+                        <a class="flex space-x-4 items-center px-4 py-2 bg-transparent rounded-lg hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" href="#">
+                            <i class="fas fa-angle-right"></i><span>Link #1</span>
+                        </a>
+                        <a class="flex space-x-4 items-center px-4 py-2 bg-transparent rounded-lg hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" href="#">
+                            <i class="fas fa-angle-right"></i><span>Link #2</span>
+                        </a>
+                        <a class="flex space-x-4 items-center px-4 py-2 bg-transparent rounded-lg hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" href="#">
+                            <i class="fas fa-angle-right"></i><span>Link #3</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- separator -->
+            <div class="-mx-2 bg-gray-900 mt-2 p-2 px-4 text-gray-500">
+                <span>Sistema</span>
+            </div>
+            <!-- more links -->
+            <a href="#" class="flex space-x-4 items-center py-2 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+                <i class="fas fa-users"></i><span>Users</span>
+            </a>
+            <a href="#" class="flex space-x-4 items-center py-2 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+                <i class="fas fa-user-tag"></i><span>Roles</span>
+            </a>
+            <a href="#" class="flex space-x-4 items-center py-2 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+                <i class="fas fa-user-lock"></i><span>Permissions</span>
+            </a>
+        </nav>
+    </div>
+    <!-- Profile sidebar -->
+    <div class="hidden md:flex flex-col space-y-2 bg-gray-700 -mx-2 p-2">
+        <div class="flex items-center">
+            <a href="#">
+                <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+            </a>
+            <div class="flex flex-col space-y-1 ml-3 text-xs">
+                <span class="font-bold">Juan Carlos</span>
+                <span>Administrador</span>
+            </div>
+        </div>
+        <div class="flex justify-around items-center border-t border-gray-600 pt-2">
+            <a href="#" class="p-2 hover:bg-gray-800 hover:text-white w-16 text-center" title="Dashboard">
+                <span class="h-6 w-6 text-center">
+                    <i class="fas fa-tachometer-alt"></i>
+                </span>
+            </a>
+            <a href="#" class="p-2 hover:bg-gray-800 hover:text-white w-16 text-center" title="Settings">
+                <span class="h-6 w-6 text-center">
+                    <i class="fas fa-cogs"></i>
+                </span>
+            </a>
+            <a href="#" class="p-2 hover:bg-gray-800 hover:text-white w-16 text-center" title="Profile">
+                <span class="h-6 w-6 text-center">
+                    <i class="fas fa-user"></i>
+                </span>
+            </a>
+            <a href="#" class="p-2 hover:text-white focus:text-white text-red-500 hover:bg-red-800 w-16 flex justify-center" title="Logout">
+                <span class="h-6 w-6 text-center">
+                    <i class="fas fa-sign-out-alt"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>
