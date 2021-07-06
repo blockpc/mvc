@@ -13,10 +13,4 @@ class PagesController extends Controller
             'user' => $user,
         ]);
     }
-
-    public function responsive()
-    {
-        session('success', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi blanditiis, accusantium eius molestias nisi debitis ut inventore quam placeat, quaerat vero vitae ratione saepe minus ea? In consequatur sunt hic?');
-        $this->render('pages.responsive');
-    }
 }
