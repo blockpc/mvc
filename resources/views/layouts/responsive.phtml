@@ -23,26 +23,26 @@
     <div class="relative min-h-screen md:flex" x-data="{mobile:false}">
         {% include partials.responsive.navbar %}
 
-        <div class="flex-1 flex flex-col h-screen justify-between scrollbar-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 overflow-y-scroll" x-on:click="mobile=false">
+        <div class="flex-1 flex flex-col max-h-screen pt-16 -mt-16 md:mt-0 md:pt-0 justify-between scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-400 overflow-y-scroll" x-on:click="mobile=false">
             <div class="py-4 px-2 sm:px-4 lg:px-4 border border-b-2 shadow-md flex justify-between items-center">
                 <h1 class="text-xl font-bold"> {% yield title %}</h1>
                 <span class="text-xs">Desktop</span>
             </div>
-            <div class="flex flex-col h-screen justify-between mb-auto">
-                <div class="block">
+            <div class="flex flex-col justify-between mb-auto">
+                <div class="flex">
                     {% include partials.responsive.messages %}
                 </div>
-                <div class="container p-5">
+                <div class="p-5">
                     {% yield content %}
                 </div>
-                <footer class="flex justify-between items-center p-5">
-                    <span>{{ APP_NAME }} © 2021 </span>
-                    <a class="flex items-center" href="//blockpc.cl">
-                        <img class="h-6 w-6 rounded mr-2" id="footer-logo" src="{{ asset('img/logos/mini-logo.png') }}">
-                        <span class="text-xs">BlockPC</span>
-                    </a>
-                </footer>
             </div>
+            <footer class="flex justify-between items-center p-5">
+                <span>{{ APP_NAME }} © 2021 </span>
+                <a class="flex items-center" href="//blockpc.cl">
+                    <img class="h-6 w-6 rounded mr-2" id="footer-logo" src="{{ asset('img/logos/mini-logo.png') }}">
+                    <span class="text-xs">BlockPC</span>
+                </a>
+            </footer>
         </div>
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
