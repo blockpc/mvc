@@ -110,3 +110,10 @@ if (! function_exists('ip') ) {
         return $ipaddress;
     }
 }
+
+if (! function_exists('is_active') ) {
+    function is_active(string $ruta = "") {
+        $path = app()->router->route($ruta);
+        return $path == app()->request->path ? 'menu-current' : 'menu-default';
+    }
+}

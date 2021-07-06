@@ -3,6 +3,7 @@
 namespace App\Controllers\System;
 
 use App\Core\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class SystemController extends Controller
 {
@@ -22,6 +23,14 @@ class SystemController extends Controller
     public function settings()
     {
         $this->render('system.settings', [
+            'user' => auth(),
+        ]);
+    }
+
+    public function profile()
+    {
+        $this->middleware('profile', auth()->id);
+        $this->render('system.profile', [
             'user' => auth(),
         ]);
     }

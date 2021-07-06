@@ -12,12 +12,4 @@ class UserController extends Controller
         parent::__construct();
         $this->middleware('auth');
     }
-
-    public function profile(User $user)
-    {
-        $this->middleware('profile', $user->id);
-        $this->render('system.user.profile', [
-            'user' => auth(),
-        ]);
-    }
 }

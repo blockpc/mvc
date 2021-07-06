@@ -5,11 +5,16 @@ use Illuminate\Hashing\HashManager;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Hash;
 
-$app = new Container();
-Facade::setFacadeApplication($app);
+$container = new Container();
+Facade::setFacadeApplication($container);
 
-$app->singleton('hash', function () use ($app) {
-    return new HashManager($app);
-});
+// $container->singleton('hash', function () use ($container) {
+//     return new HashManager($container);
+// });
 
-class_alias(Hash::class, 'Hash');
+// $container->singleton('Hash', function () use ($container) {
+//     return new Hash($container);
+// });
+
+
+// class_alias(Hash::class, 'Hash');

@@ -44,7 +44,7 @@
                     <!-- Active: "bg-gray-100", Not Active: "" -->
                     <a href="{{ route('dashboard') }}" class="block px-4 py-2 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-1">Dashboard</a>
                     <a href="{{ route('settings') }}" class="block px-4 py-2 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-                    <a href="#" class="block px-4 py-2 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+                    <a href="{{ route('profile') }}" class="block px-4 py-2 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                     <a href="#" class="block px-4 py-2 hover:text-white focus:text-white text-red-500 hover:bg-red-800 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-2" onClick="document.getElementById('logout').submit();">Sign out</a>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                     <i class="fas fa-cogs"></i>
                 </span>
             </a>
-            <a href="#" class="p-2 hover:bg-gray-800 hover:text-white w-16 text-center" title="Profile">
+            <a href="{{ route('profile') }}" class="p-2 hover:bg-gray-800 hover:text-white w-16 text-center" title="Profile">
                 <span class="h-6 w-6 text-center">
                     <i class="fas fa-user"></i>
                 </span>
