@@ -2,9 +2,50 @@
 {% block title %}Roles{% endblock %}
 
 {% block content %}
-<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
-    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
-        <span class="block">Lista de roles</span>
-    </h2>
+<div class="flex flex-col">
+    <div class="box box-default">
+        <div class="box-header">
+            <h2 class="box-title">
+                <span class="">Lista de Roles</span>
+            </h2>
+            <div class="flex">
+                <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo Role</a>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="w-full scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-400 overflow-x-scroll">
+                <table class="w-full rounded-lg divide-y divide-gray-400 dark:divide-gray-500 overflow-hidden bg-gray-400 text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-xs">
+                    <thead class="text-left">
+                        <tr>
+                            <th class="font-semibold uppercase px-3 py-2">Clave</th>
+                            <th class="font-semibold uppercase px-3 py-2">Nombre</th>
+                            <th class="font-semibold uppercase px-3 py-2">Descripción</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-gray-200 divide-y divide-gray-400 dark:divide-gray-500">
+                    {% foreach($roles as $rol): %}
+                    <tr class="dark:hover:bg-gray-700 hover:bg-gray-300">
+                        <td class="px-3 py-2">{{ $rol->key }}</td>
+                        <td class="px-3 py-2">{{ $rol->name }}</td>
+                        <td class="px-3 py-2">{{ $rol->description }}</td>
+                        <td>
+                            <div class="flex justify-end">
+                                <a href="#" class="btn btn-success">Editar</a>
+                                <a href="#" class="btn btn-danger">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endforeach; %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box-footer">
+            <div class="w-full">
+            {% include partials.paginator %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

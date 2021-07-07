@@ -1,0 +1,53 @@
+<div class="flex flex-col items-center md:flex-row md:justify-between md:items-baseline dark:text-gray-200 text-gray-700 test-sm">
+    <div class="block text-center md:text-left space-x-1 mb-2">
+        <span>Showing</span>
+        <span class="font-medium">{{ $paginador->getCurrentPageFirstItem() }}</span>
+        <span>to</span>
+        <span class="font-medium">{{ $paginador->getCurrentPageLastItem() }}</span>
+        <span>of</span>
+        <span class="font-medium">{{ $paginador->getTotalItems() }}</span>
+        <span>results</span>
+    </div>
+    {% if ($paginador->getNumPages() > 1): %}
+    <nav class="relative z-0 inline-flex rounded-md shadow-sm" aria-label="Pagination">
+        <div class="md:hidden flex space-x-4">
+            {% if ($paginador->getPrevUrl()): %}
+            <a class="flex justify-center items-center cursor-pointer rounded-full" href="{{ url($paginador->getPrevUrl()) }}">&laquo; Previous</a>
+            {% else: %}
+            <a class="flex justify-center items-center cursor-pointer rounded-full disabled" href="#">&laquo; Previous</a>
+            {% endif; %}
+            {% if ($paginador->getNextUrl()): %}
+            <a class="flex justify-center items-center cursor-pointer rounded-full" href="{{ url($paginador->getNextUrl()) }}">Next &raquo;</a>
+            {% else: %}
+            <a class="flex justify-center items-center cursor-pointer rounded-full disabled" href="#">Next &raquo;</a>
+            {% endif; %}
+        </div>
+        <div class="hidden md:flex items-center float-right h-8 font-medium rounded-full space-x-2">
+            {% if ($paginador->getPrevUrl()): %}
+            <div class="flex justify-center items-center cursor-pointer rounded-full">
+                <a class="" href="{{ url($paginador->getPrevUrl()) }}">&laquo; Previous</a>
+            </div>
+            {% endif; %}
+
+            {% foreach ($paginador->getPages() as $page): %}
+                {% if ($page['url']): %}
+                    <div {{ $page['isCurrent'] ? 'class="flex justify-center items-center cursor-pointer rounded-full bg-pink-600 text-white w-6"' : 'class="flex justify-center items-center cursor-pointer rounded-full"' }}>
+                        <a class="page-link" href="{{ url($page['url']) }}">{{ $page['num'] }}</a>
+                    </div>
+                {% else: %}
+                    <div class="disabled">
+                        <span>{{ $page['num'] }}</span>
+                    </div>
+                {% endif; %}
+            {% endforeach; %}
+
+
+            {% if ($paginador->getNextUrl()): %}
+            <div class="disabled">
+                <a class="page-link" href="{{ url($paginador->getNextUrl()) }}">Next &raquo;</a>
+            </div>
+            {% endif; %}
+        </div>
+    </nav>
+    {% endif; %}
+</div>

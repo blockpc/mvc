@@ -113,14 +113,18 @@ if (! function_exists('ip') ) {
 
 if (! function_exists('is_active') ) {
     function is_active(string $link = "") {
-        $path = app()->request->path;
+        $real_path = app()->request->path;
         $names = app()->router->names();
-        $route_name = array_search($path, $names);
         $routes_names = array_keys($names);
         $pattern = '/'.str_replace('.*', "", $link).'/i';
-        foreach ( $routes_names as $route ) {
-            if ( $match = preg_match($pattern, $route_name) ) {
-                return true;
+        foreach ( $names as $route => $path ) {
+            if ( preg_match('#^' .$link.'#i', $route) ) {
+                if ( !$p = preg_replace('/\{(\w+)\}/', '.*', $path) ) {
+                    $p = $path;
+                }
+                if ( $match = preg_match('#^' .$p.'#i', $real_path) ) {
+                    return true;
+                }
             }
         }
         return false;
@@ -136,5 +140,36 @@ if (! function_exists('link_active') ) {
 if (! function_exists('menu_active') ) {
     function menu_active(string $link = "") {
         return is_active($link) ? 'menu-current' : 'menu-default';
+    }
+}
+
+if (! function_exists('is_selected') ) {
+    function is_selected($value, $post) {
+        return ( $value == $post ) ? 'selected' : '';
+    }
+}
+
+if (! function_exists('is_checked') ) {
+    function is_checked($value, $post) {
+        return ( $value == $post ) ? 'checked' : '';
+    }
+}
+
+if (! function_exists('password') ) {
+    function password(int $lenght = 8) {
+        $bytes = random_bytes($lenght);
+        return bin2hex($bytes);
+    }
+}
+
+if (! function_exists('image_profile') ) {
+    function image_profile($user = null) {
+        $user = $user ?? auth();
+        if ( $image = $user->profile->image ) {
+            return url($image->url);
+        } else {
+            $name = str_replace(" ", "+", $user->profile->fullName);
+            return "https://ui-avatars.com/api/?name={$name}";
+        }
     }
 }

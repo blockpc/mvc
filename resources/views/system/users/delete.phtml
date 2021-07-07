@@ -1,0 +1,70 @@
+{% extends layouts.responsive %}
+{% block title %}Eliminar usuario{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center border-t-2 border-red-700 px-2">
+    <h2 class="box-title">
+        <span class="">Eliminar usuario</span>
+    </h2>
+    <div class="flex">
+        <a href="{{ route('users.index') }}" class="btn btn-warning">Lista de usuarios</a>
+    </div>
+</div>
+<form class="flex flex-wrap -mx-1 overflow-hidden" action="{{ route('users.detroy', $user->name) }}" method="post">
+    {{ csrf_token() }}
+    {{ method_field('DELETE') }}
+    <div class="my-1 px-1 w-1/2 overflow-hidden sm:w-full md:w-1/2 border-t-2 dark:border-gray-700 border-gray-200 p-2">
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center text-sm my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3">
+                <label for="name">Name or Alias <span class="dark:text-red-400 text-red-700 font-semibold">*</span></label>
+            </div>
+            <div class="md:w-2/3 md:flex-grow">
+                <input class="w-full h-10 px-3 bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400" type="text" placeholder="Name or Alias" id="name" value="{{ $user->name }}" readonly />
+            </div>
+        </div>
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center text-sm my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3">
+                <label for="email">Email <span class="dark:text-red-400 text-red-700 font-semibold">*</span></label>
+            </div>
+            <div class="md:w-2/3 md:flex-grow">
+                <input class="w-full h-10 px-3 bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400" type="text" placeholder="Email" id="email" value="{{ $user->email }}" readonly />
+            </div>
+        </div>
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center text-sm my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3">
+                <label for="role_id">Role <span class="dark:text-red-400 text-red-700 font-semibold">*</span></label>
+            </div>
+            <div class="md:w-2/3 md:flex-grow">
+                <input class="w-full h-10 px-3 bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400" type="email" placeholder="Role" id="role_id" value="{{ $user->role->name }}" readonly />
+            </div>
+        </div>
+        <hr>
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center text-sm my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3">
+                <label for="firstname">Firstname</label>
+            </div>
+            <div class="md:w-2/3 md:flex-grow">
+                <input class="w-full h-10 px-3 bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400" type="text" placeholder="Firstname" id="firstname" value="{{ $user->profile->firstname }}" readonly />
+            </div>
+        </div>
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center text-sm my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3">
+                <label for="lastname">Lastname</label>
+            </div>
+            <div class="md:w-2/3 md:flex-grow">
+                <input class="w-full h-10 px-3 bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400" type="text" placeholder="Lastname" id="lastname" value="{{ $user->profile->lastname }}" readonly />
+            </div>
+        </div>
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3"></div>
+            <div class="md:w-2/3 md:flex-grow">
+                <div class="my-2 bg-red-700 text-gray-200 p-4 rounded-lg">
+                    <span class="font-semibold">¿Esta seguro de querer eliminar este usuario?</span>
+                </div>
+                <button class="btn btn-danger">Eliminar Usuario</button>
+                <a href="{{ route('users.index') }}"class="btn text-yellow-800 dark:text-yellow-300 float-right">cancelar</a>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

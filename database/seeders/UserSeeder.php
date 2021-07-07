@@ -15,15 +15,15 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $sudo = Role::find(1);
-        $admin = Role::find(2);
-        $user = Role::find(3);
+        $role_sudo = Role::find(1);
+        $role_admin = Role::find(2);
+        $role_user = Role::find(3);
 
         $sudo = new User;
         $sudo->name = "sudo";
         $sudo->email = "sudo@mail.com";
         $sudo->password = 'password';
-        $sudo->role_id = 1;
+        $sudo->role_id = $role_sudo->id;
         $sudo->email_verified_at = date("Y-m-d H:i:s");
         $sudo->save();
         $sudo->profile()->create([
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
         $admin->name = "admin";
         $admin->email = "admin@mail.com";
         $admin->password = 'password';
-        $admin->role_id = 2;
+        $admin->role_id = $role_admin->id;
         $admin->email_verified_at = date("Y-m-d H:i:s");
         $admin->save();
         $admin->profile()->create([
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
         $juan->name = "juan";
         $juan->email = "juan@mail.com";
         $juan->password = 'password';
-        $juan->role_id = 3;
+        $juan->role_id = $role_user->id;
         $juan->email_verified_at = date("Y-m-d H:i:s");
         $juan->save();
         $juan->profile()->create([
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
         $pedro->name = "pedro";
         $pedro->email = "pedro@mail.com";
         $pedro->password = 'password';
-        $pedro->role_id = 3;
+        $pedro->role_id = $role_user->id;
         $pedro->email_verified_at = date("Y-m-d H:i:s");
         $pedro->save();
         $pedro->profile()->create([

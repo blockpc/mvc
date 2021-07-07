@@ -16,4 +16,9 @@ class Role extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function scopeRoles($query)
+    {
+        return ( auth()->role_id == 1 ) ? $query : $query->where('id', '>', 1);
+    }
 }
