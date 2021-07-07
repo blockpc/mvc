@@ -28,15 +28,16 @@ $app->router->get('/sistema/dashboard', [SystemController::class, 'dashboard'])-
 $app->router->get('/sistema/configuracion', [SystemController::class, 'settings'])->name('settings');
 $app->router->get('/sistema/perfil', [SystemController::class, 'profile'])->name('profile');
 
-$app->router->get('/sistema/usuarios', [UsersController::class, 'index'])->name('users.index');
-$app->router->get('/sistema/usuarios/nuevo', [UsersController::class, 'create'])->name('users.create');
-$app->router->post('/sistema/usuarios/nuevo', [UsersController::class, 'create'])->name('users.store');
-$app->router->get('/sistema/usuarios/editar/{user}', [UsersController::class, 'edit'])->name('users.edit');
-$app->router->put('/sistema/usuarios/editar/{user}', [UsersController::class, 'edit'])->name('users.update');
-$app->router->get('/sistema/usuarios/eliminar/{user}', [UsersController::class, 'delete'])->name('users.delete');
-$app->router->delete('/sistema/usuarios/eliminar/{user}', [UsersController::class, 'delete'])->name('users.detroy');
+// $app->router->get('/sistema/usuarios', [UsersController::class, 'index'])->name('users.index');
+// $app->router->get('/sistema/usuarios/nuevo', [UsersController::class, 'create'])->name('users.create');
+// $app->router->post('/sistema/usuarios/nuevo', [UsersController::class, 'create'])->name('users.store');
+// $app->router->get('/sistema/usuarios/editar/{user}', [UsersController::class, 'edit'])->name('users.edit');
+// $app->router->put('/sistema/usuarios/editar/{user}', [UsersController::class, 'edit'])->name('users.update');
+// $app->router->get('/sistema/usuarios/eliminar/{user}', [UsersController::class, 'delete'])->name('users.delete');
+// $app->router->delete('/sistema/usuarios/eliminar/{user}', [UsersController::class, 'delete'])->name('users.detroy');
+$app->router->resource('/sistema/usuarios', UsersController::class, 'user', 'users');
 
-$app->router->get('/sistema/roles', [RolesController::class, 'index'])->name('roles.index');
+$app->router->resource('/sistema/roles', RolesController::class, 'role', 'roles');
 
 $app->router->get('/sistema/permisos', [PermissionsController::class, 'index'])->name('permissions.index');
 

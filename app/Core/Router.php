@@ -65,6 +65,17 @@ class Router
         $this->names[$name] = $this->path;
     }
 
+    public function resource(string $path, string $class, string $model, string $route)
+    {
+        $this->get($path, [$class, 'index'])->name("{$route}.index");
+        $this->get("{$path}/nuevo", [$class, 'create'])->name("{$route}.create");
+        $this->post("{$path}/nuevo", [$class, 'create'])->name("{$route}.store");
+        $this->get("{$path}/editar/{{$model}}", [$class, 'edit'])->name("{$route}.edit");
+        $this->put("{$path}/editar/{{$model}}", [$class, 'edit'])->name("{$route}.update");
+        $this->get("{$path}/eliminar/{{$model}}", [$class, 'delete'])->name("{$route}.delete");
+        $this->delete("{$path}/eliminar/{{$model}}", [$class, 'delete'])->name("{$route}.destroy");
+    }
+
     public function names()
     {
         return $this->names;
