@@ -9,6 +9,7 @@ class Request
 {
     public $url;
     public $body;
+    public $files;
     public string $path;
     public string $method;
 
@@ -16,6 +17,7 @@ class Request
     {
         $this->url = URL_BASE;
         $this->body = [];
+        $this->files = [];
         $this->path = $this->path();
         $this->method = $this->method();
     }
@@ -71,6 +73,16 @@ class Request
                 unset($_POST['token'], $_POST['_method']);
                 foreach( $_POST as $key => $value ) {
                     $this->body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_STRING);
+                }
+                if ( $_FILES ) {
+                    // if ( isset($this->body['files']) ) {
+                    //     session('error', 'The key <b>files</b> its being used on post values. Rename the input name matched with <b>files</b>');
+                    //     return false;
+                    // }
+                    foreach( $_FILES as $key => $value ) {
+                        if ( !$value['tmp_name'] ) continue;
+                        $this->files[$key] = $value;
+                    }
                 }
             }
             return $this->body;

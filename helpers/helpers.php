@@ -29,9 +29,10 @@ if (! function_exists('flash') ) {
 }
 
 if (! function_exists('csrf_token') ) {
-    function csrf_token() {
+    function csrf_token(string $id = "") {
+        $id = $id ?: 'token';
         $token = Session::setToken();
-        echo "<input type='hidden' name='token' id='token' value='{$token}' />";
+        echo "<input type='hidden' name='token' id='{$id}' value='{$token}' />";
     }
 }
 

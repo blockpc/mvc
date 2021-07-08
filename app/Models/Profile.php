@@ -8,7 +8,7 @@ class Profile extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'firstname', 'lastname', 'image', 'user_id'
+        'firstname', 'lastname', 'user_id'
     ];
 
     /**

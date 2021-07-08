@@ -4,12 +4,16 @@ namespace App\Controllers\System;
 
 use App\Core\Controller;
 use App\Core\Request;
+use App\Core\Session;
 use App\Models\Role;
 use App\Requests\ProfileRequest;
+use App\Traits\WithUploadFiles;
 use Illuminate\Support\Facades\Hash;
 
 class SystemController extends Controller
 {
+    use WithUploadFiles;
+    
     public function __construct()
     {
         parent::__construct();
@@ -39,6 +43,15 @@ class SystemController extends Controller
             if ( $validated = $profile->validate() ) {
                 $user->update($validated['user']);
                 $user->profile()->update($validated['profile']);
+                if ( $request->files ) {
+                    $imagen = $this->upload_images($request->files, 'users', $user->name);
+                    $image = $user->profile->image();
+                    if ( $image->count() ) {
+                        $image->delete();
+                    }
+                    $image->create(['url' => $imagen[0]]);
+                }
+                app()->login($user, Session::get('rememberme'));
                 session('success', "Tus datos de usuario han sido editados");
                 redirect( route('profile'));
             }
