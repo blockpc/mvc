@@ -21,4 +21,9 @@ class Role extends Model
     {
         return ( auth()->role_id == 1 ) ? $query : $query->where('id', '>', 1);
     }
+
+    public function scopeHasRole($query, $roles)
+    {
+        return $query->whereIn('key', $roles);
+    }
 }

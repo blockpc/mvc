@@ -2,6 +2,7 @@
 
 use App\Core\Application;
 use App\Core\Session;
+use App\Models\Role;
 
 if (! function_exists('app') ) {
     function app() {
@@ -153,6 +154,13 @@ if (! function_exists('is_selected') ) {
 if (! function_exists('is_checked') ) {
     function is_checked($value, $post) {
         return ( $value == $post ) ? 'checked' : '';
+    }
+}
+
+if (! function_exists('has_role') ) {
+    function has_role(string ...$names) {
+        $roles = Role::hasRole($names)->pluck('id')->all();
+        return in_array(auth()->role_id, $roles);
     }
 }
 
