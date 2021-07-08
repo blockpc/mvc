@@ -121,9 +121,14 @@ class Router
                 return $this->render($callback);
             }
             if ( is_array($callback) ) {
-                app()->controller = new $callback[0]();
+                $class = $callback[0];
+                $method = $callback[1];
+                if( !is_callable([$class, $method]) ) {
+                    throw new RouteNameExistsException("No se encuentra el método <b>{$method}</b> en la clase <b>{$class}</b>");
+                }
+                app()->controller = new $class();
                 $controller = app()->controller;
-                $controller->action = $callback[1];
+                $controller->action = $method;
                 $callback[0] = $controller;
             }
             if ( $param_route ) {

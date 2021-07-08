@@ -7,20 +7,17 @@ use App\Core\Validator;
 use App\Models\Role;
 use App\Models\User;
 
-class UserRequest extends BaseRequest
+class ProfileRequest extends BaseRequest
 {
-    public function validate(int $id = 0)
+    public function validate()
     {
         if ( !$this->body ) {
             return false;
         }
 
-        $rule_mail_unique = 'unique,'.User::class.':email';
-        $rule_name_unique = 'unique,'.User::class.':name';
-        if ( $this->request->method == 'put' ) {
-            $rule_mail_unique = 'unique_ignore,'.User::class.':email;id:'.$id;
-            $rule_name_unique = 'unique_ignore,'.User::class.':name;id:'.$id;
-        }
+        $id = auth()->id;
+        $rule_name_unique = 'unique_ignore,'.User::class.':name;id:'.$id;
+        $rule_mail_unique = 'unique_ignore,'.User::class.':email;id:'.$id;
 
         // set validation rules
         $this->validator->validation_rules([
@@ -62,18 +59,13 @@ class UserRequest extends BaseRequest
             }
             return false;
         } else {
-            $password = $valid_data['password'] ?: $this->password();
             $new_user = [
                 'name'   => $valid_data['name'],
                 'email'   => $valid_data['email'],
                 'role_id'   => $valid_data['role_id'],
             ];
-            if ( $this->request->method == 'put' ) {
-                if ( $valid_data['password'] ) {
-                    $new_user['password'] = $valid_data['password'];
-                }
-            } else {
-                $new_user['password'] = $valid_data['password'] ?: $this->password();
+            if ( $valid_data['password'] ) {
+                $new_user['password'] = $valid_data['password'];
             }
             $valid['user'] = $new_user;
             $valid['profile'] = [

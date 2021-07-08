@@ -41,7 +41,7 @@
                 {{ text_error($role_id) }}
             </div>
             <div class="md:w-2/3 md:flex-grow">
-                <select class="w-full h-10 px-3 bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400 {{ has_error($role_id) }}"" name="role_id" id="role_id">
+                <select class="w-full h-10 px-3 bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400 {{ has_error($role_id) }}" name="role_id" id="role_id">
                     {% foreach( $roles as $role ): %}
                     <option value="{{ $role->id}}" {{ is_selected($role->id, old('role_id')) }}>{{$role->name}}</option>
                     {% endforeach; %}

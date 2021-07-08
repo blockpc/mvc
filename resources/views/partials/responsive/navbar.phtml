@@ -13,7 +13,7 @@
         </button>
     </div>
     <div class="flex-1 flex justify-between items-center" x-data="{ mode: localStorage.theme == 'dark' }">
-        <!-- Drak Mode -->
+        <!-- Dark Mode -->
         <div class="flex items-center ml-1 space-x-2">
             <button type="button" x-on:click="mode=false" x-show="mode" class="setMode" id="sun" x-cloak>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,7 +44,6 @@
                     <a href="{{ route('settings') }}" class="block px-4 py-2 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
                     <a href="{{ route('profile') }}" class="block px-4 py-2 hover:text-white focus:text-white hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                     <a href="#" class="block px-4 py-2 hover:text-white focus:text-white text-red-500 hover:bg-red-800 focus:outline-none focus:shadow-outline" role="menuitem" tabindex="-1" id="user-menu-item-2" onClick="document.getElementById('logout-mobil').submit();">Sign out</a>
-                    <!-- form logout -->
                     <form action="{{ route('auth.logout') }}" method="post" id="logout-mobil" class="hidden">
                         {{ csrf_token() }}
                         <button type="submit" class="btn btn-sm btn-danger">Logout</button>
@@ -107,7 +106,7 @@
             <ul>
                 <li class="{{ link_active('users.*') }}">
                     <a href="{{ route('users.index') }}" class="link">
-                        <i class="fas fa-users"></i><span>Users</span>
+                        <i class="fas fa-users"></i><span>Usuarios</span>
                     </a>
                 </li>
                 <li class="{{ link_active('roles.*') }}">
@@ -117,7 +116,7 @@
                 </li>
                 <li class="{{ link_active('permissions.*') }}">
                     <a href="{{ route('permissions.index') }}" class="link">
-                        <i class="fas fa-user-lock"></i><span>Permissions</span>
+                        <i class="fas fa-user-lock"></i><span>Permisos</span>
                     </a>
                 </li>
             </ul>
@@ -163,7 +162,6 @@
                     <i class="fas fa-sign-out-alt"></i>
                 </span>
             </a>
-            <!-- form logout -->
             <form action="{{ route('auth.logout') }}" method="post" id="logout-desktop" class="hidden">
                 {{ csrf_token() }}
                 <button type="submit" class="btn btn-sm btn-danger">Logout</button>

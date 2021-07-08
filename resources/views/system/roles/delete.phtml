@@ -1,0 +1,53 @@
+{% extends layouts.responsive %}
+{% block title %}Eliminar Role{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center border-t-2 border-red-700 px-2">
+    <h2 class="box-title">
+        <span class="">Eliminar Role</span>
+    </h2>
+    <div class="flex">
+        <a href="{{ route('roles.index') }}" class="btn btn-warning">Lista de roles</a>
+    </div>
+</div>
+<form action="{{ route('roles.destroy', $role->key) }}" method="post" class="flex flex-wrap -mx-1 overflow-hidden border-t-2 dark:border-gray-700 border-gray-200">
+    {{ csrf_token() }}
+    {{ method_field('DELETE') }}
+    <div class="my-2 px-2 overflow-hidden w-full lg:w-1/2">
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center text-sm my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3">
+                <label for="key">Llave <span class="dark:text-red-400 text-red-700 font-semibold">*</span></label>
+            </div>
+            <div class="md:w-2/3 md:flex-grow">
+                <input class="w-full h-10 px-3 bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400" type="text" placeholder="Llave" id="key" value="{{ $role->key }}" readonly />
+            </div>
+        </div>
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center text-sm my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3">
+                <label for="name">Nombre <span class="dark:text-red-400 text-red-700 font-semibold">*</span></label>
+            </div>
+            <div class="md:w-2/3 md:flex-grow">
+                <input class="w-full h-10 px-3 bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400" type="text" placeholder="Nombre" id="name" value="{{ $role->name }}" readonly />
+            </div>
+        </div>
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center text-sm my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3">
+                <label for="description">Descripción</label>
+            </div>
+            <div class="md:w-2/3 md:flex-grow">
+                <textarea id="description" class="w-full bg-gray-200 text-black dark:bg-gray-700 dark:text-gray-200 border rounded-lg focus:shadow-outline text-sm placeholder-gray-600 dark:placeholder-gray-400" placeholder="Descripción" readonly>{{ $role->description }}</textarea>
+            </div>
+        </div>
+        <div class="text-gray-700 dark:text-gray-200 md:flex md:items-center my-2">
+            <div class="mb-2 md:mb-0 md:w-1/3"></div>
+            <div class="md:w-2/3 md:flex-grow">
+                <div class="my-2 bg-red-700 text-gray-200 p-4 rounded-lg">
+                    <span class="font-semibold">¿Esta seguro de querer eliminar este role?</span>
+                </div>
+                <button class="btn btn-danger">Eliminar Role</button>
+                <a href="{{ route('roles.index') }}"class="btn text-yellow-800 dark:text-yellow-300 float-right">cancelar</a>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

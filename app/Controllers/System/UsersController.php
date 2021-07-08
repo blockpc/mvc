@@ -25,7 +25,7 @@ class UsersController extends Controller
         $page = isset($request->body()['page']) ? $request->body()['page'] : 1;
         $skip = ( $page == 1 ) ? 0 : ($page - 1) * $limit;
         $users = User::latest()->skip($skip)->take($limit)->get();
-        $paginador = new Paginador($count, $limit, $page, $request->path . '?page=(:num)');
+        $paginador = new Paginador($count, $limit, $page, $request->path);
         return $this->render('system.users.index',[
             'count' => $count,
             'users' => $users,
@@ -39,7 +39,6 @@ class UsersController extends Controller
             $create = new UserRequest($request);
             if ( $validated = $create->validate() ) {
                 $user = User::create($validated['user']);
-                //$validated['profile']['user_id'] = $user->id;
                 $user->profile()->create($validated['profile']);
                 session('success', "Usuario <b>{$user->name}</b> ha sido creado");
                 redirect( route('users.index'));

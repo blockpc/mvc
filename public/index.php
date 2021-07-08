@@ -27,6 +27,7 @@ $app->router->post('/register', [AuthController::class, 'register'])->name('auth
 $app->router->get('/sistema/dashboard', [SystemController::class, 'dashboard'])->name('dashboard');
 $app->router->get('/sistema/configuracion', [SystemController::class, 'settings'])->name('settings');
 $app->router->get('/sistema/perfil', [SystemController::class, 'profile'])->name('profile');
+$app->router->put('/sistema/perfil', [SystemController::class, 'profile'])->name('profile.update');
 
 // $app->router->get('/sistema/usuarios', [UsersController::class, 'index'])->name('users.index');
 // $app->router->get('/sistema/usuarios/nuevo', [UsersController::class, 'create'])->name('users.create');
