@@ -16,11 +16,11 @@ class Migrate05_create_permissions_table extends Migration
         if ( !$schema->hasTable('permissions')) {
             $schema->create('permissions', function (Blueprint $table) {
                 $table->id();
-                $table->string('name');
-                $table->string('guard_name');
-                $table->string('display_name', 255);
                 $table->string('key');
+                $table->string('name', 255);
                 $table->text('description')->nullable();
+                $table->string('type')->default('web');
+                $table->string('group');
                 $table->timestamps();
             });
         }

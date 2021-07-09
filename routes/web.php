@@ -22,4 +22,6 @@ $app->router->resource('/sistema/usuarios', UsersController::class, 'user', 'use
 
 $app->router->resource('/sistema/roles', RolesController::class, 'role', 'roles');
 
-$app->router->get('/sistema/permisos', [PermissionsController::class, 'index'])->name('permissions.index');
+$app->router->resource('/sistema/permisos', PermissionsController::class, 'permission', 'permissions');
+
+//$app->router->get('/sistema/permisos', [PermissionsController::class, 'index'])->name('permissions.index');

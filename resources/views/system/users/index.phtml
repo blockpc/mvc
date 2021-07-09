@@ -2,66 +2,68 @@
 {% block title %}Usuarios{% endblock %}
 
 {% block content %}
-<div class="flex flex-col">
-    <div class="box box-default">
-        <div class="box-header">
-            <h2 class="box-title">
-                <span class="">Lista de usuarios</span>
-            </h2>
-            <div class="flex">
-                <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo Usuario</a>
-            </div>
-        </div>
-        <div class="box-body">
-            <div class="w-full scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-400 overflow-x-scroll">
-                <table class="w-full rounded-lg divide-y divide-gray-400 dark:divide-gray-500 overflow-hidden bg-gray-400 text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-xs">
-                    <thead class="text-left">
-                        <tr>
-                            <th class="font-semibold uppercase px-3 py-2">Usuario</th>
-                            <th class="font-semibold uppercase px-3 py-2">Email</th>
-                            <th class="font-semibold uppercase px-3 py-2">Estado</th>
-                            <th class="font-semibold uppercase px-3 py-2">Role</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-gray-200 divide-y divide-gray-400 dark:divide-gray-500">
-                        {% foreach( $users as $user): %}
-                        <tr class="dark:hover:bg-gray-700 hover:bg-gray-300">
-                            <td class="px-3 py-2">
-                                <div class="flex items-center space-x-3">
-                                    <div class="inline-flex w-10 h-10">
-                                        <img class='w-10 h-10 object-cover rounded-full' alt='{{ $user->profile->fullname }}' src='{{ image_profile($user) }}' />
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold"> {{ $user->name }} </p>
-                                        <p class="text-gray-400 text-sm font-semibold tracking-wide"> {{ $user->profile->fullname }} </p>
-                                    </div>
+<div class="flex justify-between items-center border-t-2 border-blue-700 p-2">
+    <h2 class="box-title">
+        <span class="">Lista de usuarios</span>
+    </h2>
+    <div class="flex">
+        <a href="{{ route('users.create') }}" class="btn btn-primary">Nuevo Usuario</a>
+    </div>
+</div>
+<div class="lex flex-wrap p-2 overflow-hidden border-t-2 dark:border-gray-700 border-gray-200 text-xs">
+    <div class="w-full scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-400 overflow-x-scroll">
+        <table class="w-full rounded-lg divide-y divide-gray-400 dark:divide-gray-500 overflow-hidden bg-gray-400 text-gray-900 dark:bg-gray-900 dark:text-gray-200">
+            <thead class="text-left">
+                <tr>
+                    <th class="font-semibold uppercase px-3 py-2">Usuario</th>
+                    <th class="font-semibold uppercase px-3 py-2">Email</th>
+                    <th class="font-semibold uppercase px-3 py-2">Estado</th>
+                    <th class="font-semibold uppercase px-3 py-2">Role</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-gray-200 divide-y divide-gray-400 dark:divide-gray-500">
+                {% if( !$paginador->getTotalItems() ): %}
+                <tr>
+                    <td colspan="5" class="font-semibold px-3 py-2 text-center">Sin registros encontrados</td>
+                </tr>
+                {% else: %}
+                    {% foreach( $users as $user): %}
+                    <tr class="dark:hover:bg-gray-700 hover:bg-gray-300">
+                        <td class="px-3 py-2">
+                            <div class="flex items-center space-x-3">
+                                <div class="inline-flex w-10 h-10">
+                                    <img class='w-10 h-10 object-cover rounded-full' alt='{{ $user->profile->fullname }}' src='{{ image_profile($user) }}' />
                                 </div>
-                            </td>
-                            <td class="px-3 py-2">
-                                <p class=""> {{ $user->email }} </p>
-                            </td>
-                            <td class="px-3 py-2 text-center">
-                                <span class="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full"> Active </span>
-                            </td>
-                            <td class="px-3 py-2 text-center"> {{ $user->role->name }} </td>
-                            <td>
-                                <div class="flex justify-end">
-                                    <a href="{{ route('users.edit', $user->name) }}" class="btn btn-success">Editar</a>
-                                    <a href="{{ route('users.delete', $user->name) }}" class="btn btn-danger">Eliminar</a>
+                                <div>
+                                    <p class="font-semibold"> {{ $user->name }} </p>
+                                    <p class="text-gray-400 text-sm font-semibold tracking-wide"> {{ $user->profile->fullname }} </p>
                                 </div>
-                            </td>
-                        </tr>
-                        {% endforeach; %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="box-footer">
-            <div class="w-full">
+                            </div>
+                        </td>
+                        <td class="px-3 py-2">
+                            <p class=""> {{ $user->email }} </p>
+                        </td>
+                        <td class="px-3 py-2 text-center">
+                            <span class="text-white text-sm w-1/3 pb-1 bg-green-600 font-semibold px-2 rounded-full"> Active </span>
+                        </td>
+                        <td class="px-3 py-2 text-center"> {{ $user->role->name }} </td>
+                        <td>
+                            <div class="flex justify-end">
+                                <a href="{{ route('users.edit', $user->name) }}" class="btn btn-success">Editar</a>
+                                <a href="{{ route('users.delete', $user->name) }}" class="btn btn-danger">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endforeach; %}
+                {% endif; %}
+            </tbody>
+        </table>
+    </div>
+    <div class="w-full p-2">
+        {% if( $paginador->getTotalItems() ): %}
             {% include partials.paginator %}
-            </div>
-        </div>
+        {% endif; %}
     </div>
 </div>
 {% endblock %}

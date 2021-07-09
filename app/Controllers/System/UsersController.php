@@ -22,12 +22,11 @@ class UsersController extends Controller
     {
         $count = User::count();
         $limit = 10;
-        $page = isset($request->body()['page']) ? $request->body()['page'] : 1;
+        $page = isset($request->body['page']) ? $request->body['page'] : 1;
         $skip = ( $page == 1 ) ? 0 : ($page - 1) * $limit;
         $users = User::latest()->skip($skip)->take($limit)->get();
         $paginador = new Paginador($count, $limit, $page, $request->path);
         return $this->render('system.users.index',[
-            'count' => $count,
             'users' => $users,
             'paginador' => $paginador,
         ]);

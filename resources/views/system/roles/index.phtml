@@ -2,50 +2,52 @@
 {% block title %}Roles{% endblock %}
 
 {% block content %}
-<div class="flex flex-col">
-    <div class="box box-default">
-        <div class="box-header">
-            <h2 class="box-title">
-                <span class="">Lista de Roles</span>
-            </h2>
-            <div class="flex">
-                <a href="{{ route('roles.create') }}" class="btn btn-primary">Nuevo Role</a>
-            </div>
-        </div>
-        <div class="box-body">
-            <div class="w-full scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-400 overflow-x-scroll">
-                <table class="w-full rounded-lg divide-y divide-gray-400 dark:divide-gray-500 overflow-hidden bg-gray-400 text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-xs">
-                    <thead class="text-left">
-                        <tr>
-                            <th class="font-semibold uppercase px-3 py-2">Clave</th>
-                            <th class="font-semibold uppercase px-3 py-2">Nombre</th>
-                            <th class="font-semibold uppercase px-3 py-2">Descripción</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-gray-200 divide-y divide-gray-400 dark:divide-gray-500">
-                    {% foreach($roles as $rol): %}
-                    <tr class="dark:hover:bg-gray-700 hover:bg-gray-300">
-                        <td class="px-3 py-2">{{ $rol->key }}</td>
-                        <td class="px-3 py-2">{{ $rol->name }}</td>
-                        <td class="px-3 py-2">{{ $rol->description }}</td>
-                        <td>
-                            <div class="flex justify-end">
-                                <a href="{{ route('roles.edit', $rol->key) }}" class="btn btn-success">Editar</a>
-                                <a href="{{ route('roles.delete', $rol->key) }}" class="btn btn-danger">Eliminar</a>
-                            </div>
-                        </td>
-                    </tr>
-                    {% endforeach; %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="box-footer">
-            <div class="w-full">
+<div class="flex justify-between items-center border-t-2 border-blue-700 p-2">
+    <h2 class="box-title">
+        <span class="">Lista de Roles</span>
+    </h2>
+    <div class="flex">
+        <a href="{{ route('roles.create') }}" class="btn btn-primary">Nuevo Role</a>
+    </div>
+</div>
+<div class="lex flex-wrap p-2 overflow-hidden border-t-2 dark:border-gray-700 border-gray-200 text-xs">
+    <div class="w-full scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-400 overflow-x-scroll">
+        <table class="w-full rounded-lg divide-y divide-gray-400 dark:divide-gray-500 overflow-hidden bg-gray-400 text-gray-900 dark:bg-gray-900 dark:text-gray-200 text-xs">
+            <thead class="text-left">
+                <tr>
+                    <th class="font-semibold uppercase px-3 py-2">Clave</th>
+                    <th class="font-semibold uppercase px-3 py-2">Nombre</th>
+                    <th class="font-semibold uppercase px-3 py-2">Descripción</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-gray-200 divide-y divide-gray-400 dark:divide-gray-500">
+            {% if( !$paginador->getTotalItems() ): %}
+            <tr>
+                <td colspan="4" class="font-semibold px-3 py-2 text-center">Sin registros encontrados</td>
+            </tr>
+            {% else: %}
+                {% foreach($roles as $rol): %}
+                <tr class="dark:hover:bg-gray-700 hover:bg-gray-300">
+                    <td class="px-3 py-2">{{ $rol->key }}</td>
+                    <td class="px-3 py-2">{{ $rol->name }}</td>
+                    <td class="px-3 py-2">{{ $rol->description }}</td>
+                    <td>
+                        <div class="flex justify-end">
+                            <a href="{{ route('roles.edit', $rol->key) }}" class="btn btn-success">Editar</a>
+                            <a href="{{ route('roles.delete', $rol->key) }}" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endforeach; %}
+            {% endif; %}
+            </tbody>
+        </table>
+    </div>
+    <div class="w-full p-2">
+        {% if( $paginador->getTotalItems() ): %}
             {% include partials.paginator %}
-            </div>
-        </div>
+        {% endif; %}
     </div>
 </div>
 {% endblock %}
